@@ -155,6 +155,13 @@ func writeUrlInfo(t POSTStruct) WriteStruct {
 }
 
 func main() {
+
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
 	// Generates new router for api to use
 	r := mux.NewRouter()
 
@@ -165,7 +172,9 @@ func main() {
 	api.HandleFunc("/getURLS/", getURLInfo).Methods(http.MethodGet)
 	handler := cors.Default().Handler(api)
 
-	if err := http.ListenAndServe(":80", handler); err != nil {
+	fmt.Printf(port)
+
+	if err := http.ListenAndServe(":"+port, handler); err != nil {
 		log.Fatal(err)
 	}
 }
