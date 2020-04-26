@@ -179,6 +179,7 @@ export class HomeComponent implements OnInit {
 
   save(model: FormGroup) {
     // call API to save customer
+    this.hardError = false;
     var urlPost: Url[] = []
     for(let val in model.value.urls) {
       if(model.value.urls[val]["url"] == "") {
@@ -196,7 +197,7 @@ export class HomeComponent implements OnInit {
 
       urlPost.push({
         url:model.value.urls[val]["url"],
-        title: model.value.urls[val]["title"] != "" ? model.value.urls[val]["title"] : `URL `+ parseInt(val + 1)
+        title: model.value.urls[val]["title"] != "" ? model.value.urls[val]["title"] : "URL "+ (parseInt(val) + 1)
       })
     }
 
