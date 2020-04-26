@@ -22,4 +22,4 @@ ENTRYPOINT ./main
 # Document that the container uses port 8080
 EXPOSE 8080
 # Document that the container uses port 5432
-EXPOSE 5432
+EXPOSE 5432 
