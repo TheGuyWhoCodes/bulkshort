@@ -9,8 +9,8 @@
                 <label><strong>Congrats!</strong> You shortened some URLs. Here is your link:</label>
                 <div class="input-group mb-3">
                     <input class = "url"#copyable type="text" class="form-control" placeholder="N/A" aria-label="copyable url" aria-describedby="basic-addon2" readonly>
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="basic-addon2" (click)="copyInputMessage(copyable)"><i class="fas fa-copy"></i></span>
+                    <div class="input-group-append copier">
+                        <span class="input-group-text" id="basic-addon2" (click)="copyInputMessage(copyable)" data-toggle="tooltip" data-placement="top" title="Copy to clipboard"><i class="fas fa-copy"></i></span>
                     </div>
                 </div> 
             </div>

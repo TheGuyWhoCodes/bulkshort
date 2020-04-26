@@ -21,7 +21,8 @@ export class DisplayComponent implements OnInit {
     this.key = this.activatedRoute.snapshot.params.id
     this.getURLS(this.activatedRoute.snapshot.params.id).toPromise().then((x) => {
       for(let y in x["urls"]) {
-        if(x["urls"][y].Url.slice(0,7) != "http://" || x["urls"][y].Url.slice(0,8) != "https://"){
+
+        if(x["urls"][y].Url.slice(0,7) !== "http://" && x["urls"][y].Url.slice(0,8) !== "https://"){
           x["urls"][y].Url = "http://"+ x["urls"][y].Url
         }
       }

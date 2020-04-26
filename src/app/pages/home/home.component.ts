@@ -157,10 +157,10 @@ export class HomeComponent implements OnInit {
   }
 
   initUrl() {
-    const urlRegex = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    // const urlRegex = `#(?i)\b((?:[a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))#iS`;
 
     return this._fb.group({
-      url: ['', [Validators.required, Validators.pattern(urlRegex)]],
+      url: ['', [Validators.required/*, Validators.pattern(urlRegex)*/]],
       title: ['', Validators.required]
 
     });
