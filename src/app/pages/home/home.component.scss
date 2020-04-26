@@ -23,7 +23,18 @@ h2 {
     margin-top: 2em;
     margin-bottom: 2em;
 }
-
+.title-input {
+    width:30%
+}
+.title-inner-input {
+    width:100%;
+}
+.url-input{
+    width:70%;
+}
+.url-inner-input {
+    width:100%;
+}
 @media only screen and (max-width: 950px) {
     .hero {
         margin-top:2em
@@ -34,6 +45,12 @@ h2 {
     }
     h2 {
         font-size: 1.2em;
+    }
+    .title-input {
+        width:40%;
+    }
+    .url-input{
+        width:60%;
     }
   }
 
@@ -67,3 +84,4 @@ h2 {
     display:block;
     margin-bottom:10px
 }
+

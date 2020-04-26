@@ -23,10 +23,10 @@
                     <div [formGroupName]="i">
                         <div class = "single-url">
                             <div class="input-group mb-3" style="margin-bottom: 0px !important;">
-                                <div class="input-group-prepend">
-                                    <input class="input-group-text" id="basic-addon3" placeholder = "URL {{i+1}}" formControlName="title">
+                                <div class="input-group-prepend title-input">
+                                    <input class="input-group-text title-inner-input" id="basic-addon3" placeholder = "URL {{i+1}}" formControlName="title">
                                   </div>
-                                <input type="text" class="form-control" placeholder="Enter a URL..." aria-label="URL" aria-describedby="basic-addon2"  type="text" formControlName="url">
+                                <input type="text" class="form-control url-input" placeholder="Enter a URL..." aria-label="URL" aria-describedby="basic-addon2"  type="text" formControlName="url">
                                 <div class="input-group-append">
                                     <button *ngIf = "i != 0" (click)="removeUrl(i)" class = "btn btn-danger delete-url"><i class="fas fa-trash-alt"></i></button>
                                 </div>
