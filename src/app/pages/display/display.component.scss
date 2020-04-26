@@ -1,0 +1,24 @@
+.table {
+    margin-top:2em;
+}
+td {
+    width:80vw;
+}
+
+.url-success {
+    margin:2em;
+}
+
+.input-group {
+    width:50% !important;
+}
+label {
+    /* Other styling... */
+    text-align: right;
+    clear: both;
+    float:left;
+    margin-right:15px;
+}
+.success-container{
+    display:flex;justify-content:center;align-items:center;
+}

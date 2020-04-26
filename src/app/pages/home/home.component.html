@@ -1,3 +1,49 @@
-<p>
-  home works!
-</p>
+<particles [params]="myParams" [style]="myStyle" [width]="width" [height]="height"></particles>
+
+<div class = "hero">
+  <h1>lync.rip</h1>
+  <h2>Send those long links to the grave.</h2>
+
+  <div class = "url-hero">
+    <div class = "url-container">
+        <form [formGroup]="urlForm" novalidate (ngSubmit)="save(urlForm)" autocomplete="off">
+            <div *ngIf="hardError == true" class="alert alert-danger alert-dismissible errorMessage" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Oops!</strong> {{errorMessage}}
+            </div>
+
+            <!-- list of addresses -->
+            <div formArrayName="urls">
+                <div *ngFor="let address of urlForm.controls.urls.controls; let i=index">
+                    <!-- address header, show remove button when more than one address available -->
+        
+                    <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+                    <div [formGroupName]="i">
+                        <div class = "single-url">
+                            <div class="input-group mb-3" style="margin-bottom: 0px !important;">
+                                <div class="input-group-prepend">
+                                    <input class="input-group-text" id="basic-addon3" placeholder = "URL {{i+1}}" formControlName="title">
+                                  </div>
+                                <input type="text" class="form-control" placeholder="Enter a URL..." aria-label="URL" aria-describedby="basic-addon2"  type="text" formControlName="url">
+                                <div class="input-group-append">
+                                    <button *ngIf = "i != 0" (click)="removeUrl(i)" class = "btn btn-danger delete-url"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                              </div>
+                            <!--display error message if street is not valid-->
+                            <small [hidden]="urlForm.controls.urls.controls[i].controls.url.valid">
+                                Valid URL is required
+                            </small>
+                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button class = "btn btn-success success"type="submit" [disabled]="urlForm.valid"><i class="fas fa-link"></i> Submit</button>
+        </form>
+        <button class = "btn btn-primary add-url" (click)="addUrl()"><i class="fas fa-plus-circle"></i> Add URL</button>
+    </div>    
+  </div>
+</div>

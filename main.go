@@ -1,27 +1,37 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
+	"strings"
+	"time"
 
 	firebase "firebase.google.com/go"
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 	"google.golang.org/api/option"
 )
 
+type URL struct {
+	Url   string `json: "url"`
+	Title string `json: "title"`
+}
+
 type POSTStruct struct {
-	Title string   `json:"title"`
-	Urls  []string `json:"urls"`
+	Title string `json:"title"`
+	Urls  []URL  `json:"urls"`
 }
 
 type WriteStruct struct {
-	Title string   `json:"title"`
-	Urls  []string `json:"urls"`
-	Id    int32
+	Title string `json:"title"`
+	Urls  []URL  `json:"urls"`
+	Id    string
 }
 
 func writeURL(w http.ResponseWriter, r *http.Request) {
@@ -71,8 +81,41 @@ func getURLInfo(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func generateKey() int32 {
-	return rand.Int31()
+func generateKey() string {
+	title := ""
+	adj, err := os.Open("./wordlist/adj.txt")
+
+	if err != nil {
+		panic(err)
+	}
+	defer adj.Close()
+
+	noun, err := os.Open("./wordlist/noun.txt")
+
+	if err != nil {
+		panic(err)
+	}
+	defer noun.Close()
+
+	var adjs []string
+	var nouns []string
+
+	scanner := bufio.NewScanner(adj)
+	for scanner.Scan() {
+		adjs = append(adjs, scanner.Text())
+	}
+
+	scannerNoun := bufio.NewScanner(noun)
+	for scannerNoun.Scan() {
+		nouns = append(nouns, scannerNoun.Text())
+	}
+
+	rand.Seed(time.Now().Unix())
+	title += strings.Title(adjs[rand.Int()%len(adjs)])
+	title += strings.Title(adjs[rand.Int()%len(adjs)])
+	title += strings.Title(nouns[rand.Int()%len(nouns)])
+
+	return title
 }
 
 func writeUrlInfo(t POSTStruct) WriteStruct {
@@ -120,6 +163,7 @@ func main() {
 
 	api.HandleFunc("/writeURL/", writeURL).Methods(http.MethodPost)
 	api.HandleFunc("/getURLS/", getURLInfo).Methods(http.MethodGet)
+	handler := cors.Default().Handler(api)
 
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(":8080", handler))
 }
