@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  api: "http://google.com/",
-  url: "lync.rip"
+  api: "http://34.70.184.135/",
+  url: "lyncrip.herokuapp.com"
 };
