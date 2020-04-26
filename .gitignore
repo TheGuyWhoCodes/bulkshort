@@ -55,3 +55,5 @@ e2e/*.map
 /Godeps/
 
 # End of https://www.gitignore.io/api/go,angular
+
+serviceAccountKey.json
