@@ -165,5 +165,7 @@ func main() {
 	api.HandleFunc("/getURLS/", getURLInfo).Methods(http.MethodGet)
 	handler := cors.Default().Handler(api)
 
-	log.Fatal(http.ListenAndServe(":8080", handler))
+	if err := http.ListenAndServe(":8080", handler); err != nil {
+		log.Fatal(err)
+	}
 }
