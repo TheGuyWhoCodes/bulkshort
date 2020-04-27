@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  api: "https://hidden-badlands-96262.herokuapp.com/",
+  api: "http://34.70.184.135/",
   url: "http://lync.rip/"
 };
