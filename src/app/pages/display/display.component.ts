@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { isEmpty } from 'lodash';
 import { environment } from '../../../environments/environment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-display',
@@ -15,11 +16,12 @@ export class DisplayComponent implements OnInit {
   private urls: {} = {}
   private success: boolean = false
   private key: string = ""
-  constructor(private router: Router, private http: HttpClient, private activatedRoute: ActivatedRoute) { }
+  constructor(private router: Router, private http: HttpClient, private activatedRoute: ActivatedRoute, private titleService: Title) { }
 
   ngOnInit() {
     this.key = this.activatedRoute.snapshot.params.id
     this.getURLS(this.activatedRoute.snapshot.params.id).toPromise().then((x) => {
+      this.titleService.setTitle("lync.rip :: "+this.activatedRoute.snapshot.params.id)
       for(let y in x["urls"]) {
 
         if(x["urls"][y].Url.slice(0,7) !== "http://" && x["urls"][y].Url.slice(0,8) !== "https://"){

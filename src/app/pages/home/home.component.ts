@@ -4,6 +4,7 @@ import { Url, PostResponse } from './url.interface';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -23,10 +24,10 @@ export class HomeComponent implements OnInit {
 
   errorMessage = "This is an error on our end, try again later!"
 
-  constructor(private _fb: FormBuilder, private http: HttpClient, private router: Router) { }
+  constructor(private _fb: FormBuilder, private http: HttpClient, private router: Router, private titleService: Title) { }
 
   ngOnInit() {
-
+    this.titleService.setTitle("lync.rip :: home")
     this.urlForm = this._fb.group({
       name: ['name', [Validators.required, Validators.minLength(5)]],
       urls: this._fb.array([
