@@ -16,11 +16,16 @@ export class DisplayComponent implements OnInit {
   private urls: {} = {}
   private success: boolean = false
   private key: string = ""
+  private failed = false
   constructor(private router: Router, private http: HttpClient, private activatedRoute: ActivatedRoute, private titleService: Title) { }
 
   ngOnInit() {
     this.key = this.activatedRoute.snapshot.params.id
     this.getURLS(this.activatedRoute.snapshot.params.id).toPromise().then((x) => {
+      if(x["Url"] == null) {
+        this.failed = true
+        return
+      }
       this.titleService.setTitle("lync.rip :: "+this.activatedRoute.snapshot.params.id)
       for(let y in x["urls"]) {
 
