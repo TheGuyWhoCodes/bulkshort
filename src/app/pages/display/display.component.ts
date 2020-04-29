@@ -22,10 +22,10 @@ export class DisplayComponent implements OnInit {
   ngOnInit() {
     this.key = this.activatedRoute.snapshot.params.id
     this.getURLS(this.activatedRoute.snapshot.params.id).toPromise().then((x) => {
-      if(x["Url"] == null) {
-        this.failed = true
-        return
-      }
+      // if(x["Url"] == null) {
+      //   this.failed = true
+      //   return
+      // }
       this.titleService.setTitle("lync.rip :: "+this.activatedRoute.snapshot.params.id)
       for(let y in x["urls"]) {
 

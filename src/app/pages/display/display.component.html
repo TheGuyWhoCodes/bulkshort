@@ -1,12 +1,12 @@
 <app-header></app-header>
 
 <div class = "container">
-
+<!-- 
     <div *ngIf = "failed" class = "failed">
         <i class="fas fa-question fa-10x"></i>
         <h1><strong>Oh snap!</strong></h1>
         <h3> <br> Couldn't find your URL, you've probably clicked on an invalid link. To learn more about lync.rip, please visit the <a href = "/">homepage</a></h3>
-    </div>
+    </div> -->
 
     <div [hidden]="!success">
         <button (click)="redirectHome()" type="button" class="btn btn-light"><i class="fas fa-backspace"></i>  Create another URL</button>
