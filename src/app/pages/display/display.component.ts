@@ -20,13 +20,15 @@ export class DisplayComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient, private activatedRoute: ActivatedRoute, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("lync.rip :: "+this.activatedRoute.snapshot.params.id)
     this.key = this.activatedRoute.snapshot.params.id
     this.getURLS(this.activatedRoute.snapshot.params.id).toPromise().then((x) => {
-      // if(x["Url"] == null) {
-      //   this.failed = true
-      //   return
-      // }
-      this.titleService.setTitle("lync.rip :: "+this.activatedRoute.snapshot.params.id)
+      if(x["urls"] == null) {
+        this.failed = true
+        this.success=false
+        this.titleService.setTitle("lync.rip :: error!")
+        return
+      }
       for(let y in x["urls"]) {
 
         if(x["urls"][y].Url.slice(0,7) !== "http://" && x["urls"][y].Url.slice(0,8) !== "https://"){
@@ -36,7 +38,6 @@ export class DisplayComponent implements OnInit {
       this.urls = x
     })
     this.success = this.activatedRoute.snapshot.queryParamMap.get("success") === 'true'
-
     this.input.nativeElement.focus()
     this.input.nativeElement.value = environment.url+this.key
   }
